@@ -13,8 +13,8 @@ Route::get('/read', function () {
     return view('read', ['profiles' => Profile::all() ]);
 })->name('read');
 Route::get('/update', function () {
-    return view('update');
+    return view('update', ['profiles' => Profile::all()]);
 })->name('update');
 Route::get('/delete', function () {
-    return view('delete');
+    return view('delete', ['profiles' => Profile::all()]);
 })->name('delete');

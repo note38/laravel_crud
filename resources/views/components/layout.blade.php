@@ -141,6 +141,6 @@
         </h1>
     </div>
 </header>
-<div class="mx-auto max-w-7xl py-4 grid grid-cols-5 grid-rows-5 gap-4">
+<div>
     {{ $slot }}
 </div>
