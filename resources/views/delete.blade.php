@@ -20,9 +20,13 @@
             <div class="mt-4 text-gray-500 font-bold text-sm">
                 {{ $profile['phone_number'] }}
             </div>
-            <button type="button" class="focus:outline-black text-white text-sm mt-4 py-2 px-4 border-b-4 border-red-600 bg-red-500 hover:bg-red-400">Delete</button>
+            <button form="delete_form" type="submit" class="focus:outline-black text-white text-sm mt-4 py-2 px-4 border-b-4 border-red-600 bg-red-500 hover:bg-red-400">Delete</button>
           </div>
           
         @endforeach
+        <form action="/delete/{{ $profile->id }}" method="post" id="delete_form">
+        @csrf
+      @method('DELETE')
+      </form>
      </div>
 </x-layout>

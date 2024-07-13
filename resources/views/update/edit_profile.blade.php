@@ -1,10 +1,11 @@
 <x-layout>
     <x-slot:header>
-        Update Profile: <strong>{{$profile->name}}</strong>
+        Edit Profile: {{$profile->name}}
     </x-slot:header>
 
-    <form action="">
+    <form method="POST" action="/update/{{$profile->id}}">
         @csrf
+        @method('PATCH')
         <section class="py-40 bg-gray-100  bg-opacity-50 h-screen">
             <div class="mx-auto container max-w-2xl md:w-3/4 shadow-md">
              
@@ -33,6 +34,7 @@
                         type="email"
                         class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                         placeholder="email@example.com"
+                        value="{{ $profile->email }}"
                         disabled
                       />
                     </div>
@@ -65,6 +67,8 @@
                           type="text"
                           class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                           placeholder="Charly Olivas"
+                          name="name"
+                          value="{{ $profile->name }}"
                         />
                       </div>
                     </div>
@@ -90,6 +94,8 @@
                           type="text"
                           class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                           placeholder="12341234"
+                          name="phone_number"
+                          value="{{ $profile->phone_number }}"
                         />
                       </div>
                     </div>
@@ -100,12 +106,13 @@
                 <div class="md:inline-flex w-full space-y-4 md:space-y-0 p-8 text-gray-500 items-center">
                  
                   <div class="md:w-5/12 w-full md:pl-9 max-w-sm mx-auto space-y-5 md:inline-flex">
-                    <div class="w-full inline-flex border-b">
-                        <button class="text-white w-full mx-auto max-w-sm rounded-md text-center bg-indigo-400 py-2 px-4">
-                           
-                            Create
-                          </button>
+                    <div class="w-full flex justify-center">
+
+                      <a href="{{ route('update') }}" class="bg-white hover:bg-gray-100 border text-gray-800 font-semibold py-3 pb-[1rem] px-5">Cancel</a>
+                      <button type="submit"  class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2.5 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Update</button>
+                          
                     </div>
+                    
                   </div>
       
                  
