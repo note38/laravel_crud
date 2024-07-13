@@ -1,17 +1,15 @@
 <x-layout>
     <x-slot:header>
-        Create Page.
+        Update Profile: <strong>{{$profile->name}}</strong>
     </x-slot:header>
 
-    
+    <form action="">
+        @csrf
         <section class="py-40 bg-gray-100  bg-opacity-50 h-screen">
             <div class="mx-auto container max-w-2xl md:w-3/4 shadow-md">
              
               <div class="bg-white space-y-6">
-  <form method="POST" action="/create">
-        @csrf
                 <div class="md:inline-flex space-y-4 md:space-y-0 w-full p-4 text-gray-500 items-center">
-                  
                   <h2 class="md:w-1/3 max-w-sm mx-auto">Account</h2>
                   <div class="md:w-2/3 max-w-sm mx-auto">
                     <label class="text-sm text-gray-400">Email</label>
@@ -32,12 +30,10 @@
                         </svg>
                       </div>
                       <input
-                        type="text"
-                        name="email"
-                        value="{{ old('email') }}"
+                        type="email"
                         class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                         placeholder="email@example.com"
-                        autocomplete="off"
+                        disabled
                       />
                     </div>
                   </div>
@@ -67,11 +63,8 @@
                         </div>
                         <input
                           type="text"
-                          name="name"
-                          value="{{ old('name') }}"
                           class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                           placeholder="Charly Olivas"
-                          autocomplete="off"
                         />
                       </div>
                     </div>
@@ -95,11 +88,8 @@
                         </div>
                         <input
                           type="text"
-                          name="phone_number"
-                          value="{{ old('phone_number') }}"
                           class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                           placeholder="12341234"
-                          
                         />
                       </div>
                     </div>
@@ -111,7 +101,7 @@
                  
                   <div class="md:w-5/12 w-full md:pl-9 max-w-sm mx-auto space-y-5 md:inline-flex">
                     <div class="w-full inline-flex border-b">
-                        <button type="submit" class="text-white w-full mx-auto max-w-sm rounded-md text-center bg-indigo-400 py-2 px-4">
+                        <button class="text-white w-full mx-auto max-w-sm rounded-md text-center bg-indigo-400 py-2 px-4">
                            
                             Create
                           </button>
@@ -121,19 +111,11 @@
                  
       
                 <hr />
-                @if ($errors->any())
-                  <ul>
-                    @foreach ($errors->all() as $error)
-                    <li class="text-red-500 italic">
-                      {{ $error }}
-                    </li>
-                    @endforeach
-                  </ul>
-                @endif
-        </form>
+                
               </div>
             </div>
         </section>
-    
+    </form>
 
 </x-layout>
+

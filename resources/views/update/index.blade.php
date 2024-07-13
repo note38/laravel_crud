@@ -20,7 +20,7 @@
             <div class="mt-4 text-gray-500 font-bold text-sm">
                 {{ $profile['phone_number'] }}
             </div>
-            <button type="button" class="focus:outline-black text-white mt-4 text-sm py-2 px-3 border-b-4 border-gray-600 bg-gray-500 hover:bg-gray-400">Update</button>
+            <a href="/update/{{$profile->id}}/edit"  class="focus:outline-black block text-white mt-4 text-center text-sm py-2 px-3 border-b-4 border-gray-600 bg-gray-500 hover:bg-gray-400">Update</a>
           </div>
           
         @endforeach
