@@ -2,65 +2,27 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Profile;
+use App\Http\Controllers\Profile_info;
 
 Route::get('/', function () {
     return view('index');
 });
 // create profile
-Route::get('/create', function () {
-    return view('create');
-})->name('create');
-Route::post('/create', function () {
-    request()->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email:rfc,dns', 'unique:profiles'],
-        'phone_number' => ['required', 'string', 'max:15']
-    ]);
-    Profile::create([
-        'name' => request('name'),
-        'email' => request('email'),
-        'phone_number' => request('phone_number')
-    ]);
-    return redirect()->route('read');
+Route::view('/create', 'create')->name('create');;
+Route::post('/create', [Profile_info::class, 'create']);
 
-    // dd(request()->all());
-});
 // show profile
-Route::get('/read', function () {
-    return view('read', ['profiles' => Profile::all() ]);
-})->name('read');
-Route::get('/update', function () {
-    return view('update.index', ['profiles' => Profile::all()]);
-})->name('update');
+Route::get('/read',[Profile_info::class, 'read'])->name('read');
+Route::get('/update', [Profile_info::class, 'update_index'])->name('update');
 
 // edit profile
-Route::get('/update/{id}/edit', function ($id) {
-    $profile = Profile::find($id);
-    return view('update.edit_profile', ['profile' => $profile ]);
-});
+Route::get('/update/{id}/edit', [Profile_info::class, 'show_edit']);
+
 // update profile
-Route::patch('/update/{id}', function ($id) {
+Route::patch('/update/{id}', [Profile_info::class, 'update']);
 
-    request()->validate([
-        'name' => ['required','string','max:255'],
-        'phone_number' => ['required','string','max:15']
-    ]);
-
-    $profile = Profile::findOrFail($id);
-
-    $profile->update([
-        'name' => request('name'),
-        'phone_number' => request('phone_number')
-    ]);
-    
-    return redirect()->route('update');
-});
 // delete profile
-Route::delete('/delete/{id}', function ($id) {
-    $profile = Profile::find($id);
-    $profile->delete();
-    return redirect()->route('delete');
-});
+Route::delete('/delete/{id}',[Profile_info::class, 'delete']);
 Route::get('/delete', function () {
     return view('delete', ['profiles' => Profile::all()]);
 })->name('delete');
