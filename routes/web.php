@@ -8,7 +8,7 @@ Route::get('/', function () {
     return view('index');
 });
 // create profile
-Route::view('/create', 'create')->name('create');;
+Route::view('/create', 'create')->name('create');
 Route::post('/create', [Profile_info::class, 'create']);
 
 // show profile
